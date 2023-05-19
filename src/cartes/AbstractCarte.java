@@ -3,7 +3,7 @@ package cartes;
 /**
  * Classe mère de toutes les cartes
  */
-public abstract class AbstractCarte {
+public abstract class AbstractCarte implements Comparable<AbstractCarte> {
     private Couleur couleur;
     public AbstractCarte(Couleur couleur) {
         this.couleur = couleur;
@@ -17,7 +17,7 @@ public abstract class AbstractCarte {
         this.couleur = couleur;
     }
 
-    public boolean estjouable(AbstractCarte autrecarte){
+    public boolean estJouable(AbstractCarte autrecarte){
         return autrecarte.couleur == couleur;
     }
 

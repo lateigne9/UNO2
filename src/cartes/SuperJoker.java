@@ -3,11 +3,10 @@ package cartes;
 /**
  * carte de type super joker
  */
-public class SuperJoker extends AbstractCarteAttaque implements Comparable<AbstractCarte>{
+public class SuperJoker extends AbstractCarteAttaque {
 
     public SuperJoker(TypeAttaque attaque, boolean pouvoir) {
         super(attaque,Couleur.NOIR, pouvoir);
-
     }
 
     /**Change la couleur du superJoker pour correspondre a une des 4 couleurs
@@ -18,7 +17,13 @@ public class SuperJoker extends AbstractCarteAttaque implements Comparable<Abstr
     }
 
     @Override
-    public int compareTo(AbstractCarte carte) {
+    public boolean estJouable(AbstractCarteAttaque autreCarte){
+        /*parce que toute les carte super joker sont jouables en tout temps*/
+        return true;
+    }
+
+    @Override
+    public int compareTo(AbstractCarte o) {
         return 0;
     }
 }

@@ -1,4 +1,5 @@
 import cartes.AbstractCarte;
+import cartes.AbstractCarteAttaque;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,12 +21,12 @@ public class Jeu {
             for (Joueur joueur :listeJoueur) {
                 TourJoueur joueurQuijoue=new TourJoueur(table ,joueur,paquet.getPaquet());
                 table= joueurQuijoue.tourJoueur();
+                setFinPartie(joueur);
+                // todo regarder le type de la carte sur la table pour prendre une decision sur la suite
+                if (table instanceof AbstractCarteAttaque){
 
-
-                if (joueur.getMain().size()==0){
-                    finPartie=true;
-                    break;
                 }
+
             }
         }
     }
@@ -69,13 +70,16 @@ public class Jeu {
     }
 
 
+    /** change l'attribut de fin de partie si le joueur a la main vide
+     * @param joueur joueur à tester
+     */
     private void setFinPartie(Joueur joueur){
         if (joueur.getMain().size()==0){
             finPartie=true;
         }
     }
     public static void main(String[] args) {
-        Jeu main=new Jeu();
+        new Jeu();
     }
 
 }

@@ -3,7 +3,7 @@ package cartes;
 /**
  * Carte normale avec un chiffre
  */
-public class Normale extends AbstractCarte implements Comparable<AbstractCarte>{
+public class Normale extends AbstractCarte{
     private int numero;
 
     public Normale(int numero, Couleur couleur) {
@@ -16,9 +16,9 @@ public class Normale extends AbstractCarte implements Comparable<AbstractCarte>{
     }
 
     @Override
-    public boolean estjouable(AbstractCarte autrecarte) {
+    public boolean estJouable(AbstractCarte autrecarte) {
         boolean retour=false;
-        if (super.estjouable(autrecarte)||((Normale) autrecarte).getNumero()==numero){
+        if (super.estJouable(autrecarte)||((Normale) autrecarte).getNumero()==numero){
             retour=true;
         }
         return retour;
@@ -38,7 +38,7 @@ public class Normale extends AbstractCarte implements Comparable<AbstractCarte>{
     }
 
     @Override
-    public int compareTo(AbstractCarte carte) {
+    public int compareTo(AbstractCarte o) {
         return 0;
     }
 }

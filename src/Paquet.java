@@ -7,10 +7,6 @@ public class Paquet {
 
     public Paquet() {
         List<AbstractCarte> temp=new ArrayList<>(NOMBRE_DE_CARTES);
-//        for (int couleur = 0; couleur < 4; couleur++) {
-//            AbstractCarte carte=new Normale(0,donneCouleur(couleur));
-//            temp.add(carte);
-//        }
         for (int numero = 1; numero < 10; numero++) {
             for (int nombre = 0; nombre < 2; nombre++) {
                 for (int couleur = 0; couleur < 4; couleur++) {
@@ -50,18 +46,18 @@ public class Paquet {
         };
     }
 
-    private CarteAttaque.TypeAttaque donneAttaque(int numero){
+    private TypeAttaque donneAttaque(int numero){
         return switch (numero%3){
-            case 1-> CarteAttaque.TypeAttaque.PLUS_2;
-            case 2-> CarteAttaque.TypeAttaque.INVERSION;
-            default -> CarteAttaque.TypeAttaque.INTERDIT_DE_JOUER;
+            case 1-> TypeAttaque.PLUS_2;
+            case 2-> TypeAttaque.INVERSION;
+            default -> TypeAttaque.INTERDIT_DE_JOUER;
         };
     }
 
-    private CarteAttaque.TypeAttaque donneSuperAttaque(int numero){
+    private TypeAttaque donneSuperAttaque(int numero){
         return switch (numero%2){
-          case 1-> CarteAttaque.TypeAttaque.PLUS_4;
-          default -> CarteAttaque.TypeAttaque.CHANGE_COULEUR;
+          case 1-> TypeAttaque.PLUS_4;
+          default -> TypeAttaque.CHANGE_COULEUR;
         };
     }
 
