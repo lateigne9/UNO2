@@ -23,11 +23,13 @@ public abstract class AbstractCarteAttaque extends AbstractCarte {
         return pouvoir;
     }
 
-    /**Donne le numero à l'attaque correspondante et passe le pouvoir de l'attaque sur false
+    /**
+     * Donne le numero à l'attaque correspondante et passe le pouvoir de l'attaque sur false
+     *
      * @return le numero de l'attaque
      */
     public int attaque() {
-        pouvoir=false;
+        pouvoir = false;
         return switch (attaque) {
             case INVERSION -> 1;
             case PLUS_2 -> 2;

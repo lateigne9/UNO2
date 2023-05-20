@@ -3,6 +3,7 @@ import cartes.utilsCarte.TrieurCartesMain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Joueur {
     private String nom;
@@ -36,7 +37,11 @@ public class Joueur {
         return main;
     }
 
-    public void setMain(List<AbstractCarte> main) {
-        this.main = main;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Joueur joueur = (Joueur) o;
+        return Objects.equals(nom, joueur.nom) && Objects.equals(main, joueur.main);
     }
 }

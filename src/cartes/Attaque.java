@@ -3,10 +3,10 @@ package cartes;
 /**
  * Carte de type attaque
  */
-public class Attaque extends AbstractCarteAttaque{
+public class Attaque extends AbstractCarteAttaque {
 
     public Attaque(TypeAttaque attaque, Couleur couleur, boolean pouvoir) {
-        super(attaque,couleur,pouvoir);
+        super(attaque, couleur, pouvoir);
     }
 
     @Override

@@ -3,7 +3,7 @@ package cartes;
 /**
  * Carte normale avec un chiffre
  */
-public class Normale extends AbstractCarte{
+public class Normale extends AbstractCarte {
     private int numero;
 
     public Normale(int numero, Couleur couleur) {
@@ -17,16 +17,16 @@ public class Normale extends AbstractCarte{
 
     @Override
     public boolean estJouable(AbstractCarte autrecarte) {
-        boolean retour=false;
-        if (super.estJouable(autrecarte)||((Normale) autrecarte).getNumero()==numero){
-            retour=true;
+        boolean retour = false;
+        if (super.estJouable(autrecarte) || ((Normale) autrecarte).getNumero() == numero) {
+            retour = true;
         }
         return retour;
     }
 
     @Override
     public String toString() {
-        return numero+" "+getCouleur();
+        return numero + " " + getCouleur();
     }
 
     @Override

@@ -1,8 +1,6 @@
 import cartes.*;
 
-import java.util.InputMismatchException;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class TourJoueur {
     private AbstractCarte carteSurTable;
@@ -15,14 +13,15 @@ public class TourJoueur {
         this.pioche = pioche;
     }
 
-    public AbstractCarte tourJoueur() {
-        boolean peutJouer=true;
+    public AbstractCarte tourJoueur(List<Joueur> ordreJoueur) {
+        boolean peutJouer = true;
         if (carteSurTable instanceof AbstractCarteAttaque && ((AbstractCarteAttaque) carteSurTable).isPouvoir()) {
             int typeAttaque = ((AbstractCarteAttaque) carteSurTable).attaque();
             switch (typeAttaque) {
-                case 1 ->
+                case 1 -> {
                     /*todo implementer methode d'invertion de jeu*/
-                        System.out.println("une inversion a ete joué");
+                    changeOrdre(ordreJoueur);
+                }
                 case 2, 4 -> {
                     attaquePlCarte(typeAttaque);
                     ((AbstractCarteAttaque) carteSurTable).setPouvoir(false);
@@ -30,15 +29,24 @@ public class TourJoueur {
                 }
                 case 3 -> {
                     peutJouer = false;
-                    System.out.println(joueur.getNom()+" s'est fait passé son tour");
+                    System.out.println(joueur.getNom() + " s'est fait passé son tour");
                     ((AbstractCarteAttaque) carteSurTable).setPouvoir(false);
                 }
             }
         }
-        if (peutJouer){
+        if (peutJouer) {
             jouer();
         }
         return carteSurTable;
+    }
+
+    private void changeOrdre(List<Joueur> ordreJoueur) {
+        Iterator<Joueur> joueurIterator = ordreJoueur.listIterator();
+        List<Joueur> listeRetour = new ArrayList<>();
+        while (joueurIterator.hasNext()) {
+            Joueur joueur = joueurIterator.next();
+
+        }
     }
 
     private void attaquePlCarte(int nombreCarte) {
@@ -48,12 +56,13 @@ public class TourJoueur {
             }
         }
     }
-    private void changeCouleur(SuperJoker carte){
-        switch (templateDiscussionChangeCouleur()){
-            case 1->carte.changeCouleur(Couleur.ROUGE);
-            case 2-> carte.changeCouleur(Couleur.BLEU);
-            case 3->carte.changeCouleur(Couleur.VERT);
-            case 4-> carte.changeCouleur(Couleur.JAUNE);
+
+    private void changeCouleur(SuperJoker carte) {
+        switch (templateDiscussionChangeCouleur()) {
+            case 1 -> carte.changeCouleur(Couleur.ROUGE);
+            case 2 -> carte.changeCouleur(Couleur.BLEU);
+            case 3 -> carte.changeCouleur(Couleur.VERT);
+            case 4 -> carte.changeCouleur(Couleur.JAUNE);
         }
     }
 
@@ -70,13 +79,13 @@ public class TourJoueur {
                 finTour = true;
             } else if (verifieCarteEstJouable(positionDeLaCarte)) {
                 joueCarte(positionDeLaCarte);
-                if (carteSurTable instanceof SuperJoker){
-                    changeCouleur((SuperJoker)carteSurTable);
+                if (carteSurTable instanceof SuperJoker) {
+                    changeCouleur((SuperJoker) carteSurTable);
                 }
                 finTour = true;
             }
         } while (!finTour);
-        System.out.println("\nfin du tour de " + joueur.getNom()+'\n');
+        System.out.println("\nfin du tour de " + joueur.getNom() + '\n');
 
     }
 
@@ -129,8 +138,9 @@ public class TourJoueur {
     private void joueCarte(int position) {
         carteSurTable = joueur.getMain().remove(position - 1);
     }
-    private int templateDiscussionChangeCouleur(){
-        Scanner input= new Scanner(System.in);
+
+    private int templateDiscussionChangeCouleur() {
+        Scanner input = new Scanner(System.in);
         int retour;
         do {
             System.out.println("""
@@ -139,15 +149,15 @@ public class TourJoueur {
                     Bleu = 2
                     Vert = 3
                     Jaune = 4
-                    
+                                        
                     Saisir le chiffre correspondant :
                     """);
-            try{
-                retour= input.nextInt();
-            }catch (InputMismatchException e){
-                retour=0;
+            try {
+                retour = input.nextInt();
+            } catch (InputMismatchException e) {
+                retour = 0;
             }
-        }while (retour<1||retour>4);
+        } while (retour < 1 || retour > 4);
 
         return retour;
     }
