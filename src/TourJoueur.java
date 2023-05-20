@@ -16,25 +16,28 @@ public class TourJoueur {
     }
 
     public AbstractCarte tourJoueur() {
+        boolean peutJouer=true;
         if (carteSurTable instanceof AbstractCarteAttaque && ((AbstractCarteAttaque) carteSurTable).isPouvoir()) {
             int typeAttaque = ((AbstractCarteAttaque) carteSurTable).attaque();
             switch (typeAttaque) {
-                case 1:
-                    System.out.println("une invertion a ete joué");
-                case 2:
+                case 1 ->
+                    /*todo implementer methode d'invertion de jeu*/
+                        System.out.println("une inversion a ete joué");
+                case 2, 4 -> {
                     attaquePlCarte(typeAttaque);
-                case 3:
-                    System.out.println("interditction de jouer");
-                case 4:
-                    attaquePlCarte(typeAttaque);
-                    System.out.println("choisir couleur ici");
-                case 5:
-                    System.out.println("choisir couleur ici");
+                    ((AbstractCarteAttaque) carteSurTable).setPouvoir(false);
+                    peutJouer = false;
+                }
+                case 3 -> {
+                    peutJouer = false;
+                    System.out.println(joueur.getNom()+" s'est fait passé son tour");
+                    ((AbstractCarteAttaque) carteSurTable).setPouvoir(false);
+                }
             }
-        } else {
+        }
+        if (peutJouer){
             jouer();
         }
-
         return carteSurTable;
     }
 
@@ -43,6 +46,14 @@ public class TourJoueur {
             if (pioche.size() != 0) {
                 joueur.getMain().add(pioche.poll());
             }
+        }
+    }
+    private void changeCouleur(SuperJoker carte){
+        switch (templateDiscussionChangeCouleur()){
+            case 1->carte.changeCouleur(Couleur.ROUGE);
+            case 2-> carte.changeCouleur(Couleur.BLEU);
+            case 3->carte.changeCouleur(Couleur.VERT);
+            case 4-> carte.changeCouleur(Couleur.JAUNE);
         }
     }
 
@@ -59,19 +70,22 @@ public class TourJoueur {
                 finTour = true;
             } else if (verifieCarteEstJouable(positionDeLaCarte)) {
                 joueCarte(positionDeLaCarte);
+                if (carteSurTable instanceof SuperJoker){
+                    changeCouleur((SuperJoker)carteSurTable);
+                }
                 finTour = true;
             }
         } while (!finTour);
-        System.out.println("fin du tour de " + joueur.getNom());
+        System.out.println("\nfin du tour de " + joueur.getNom()+'\n');
 
     }
 
     private void afficheTour() {
-        System.out.println(carteSurTable.toString() + "\n" + joueur.afficheMain());
+        System.out.println(carteSurTable.toString() + "\n\n" + joueur.afficheMain());
     }
 
     private int demandeCarteJoueur() {
-        int retour = -1;
+        int retour;
         do {
             System.out.print("Quelle carte veux tu jouer ? (0=pioche) ");
             Scanner input = new Scanner(System.in);
@@ -114,6 +128,28 @@ public class TourJoueur {
      */
     private void joueCarte(int position) {
         carteSurTable = joueur.getMain().remove(position - 1);
+    }
+    private int templateDiscussionChangeCouleur(){
+        Scanner input= new Scanner(System.in);
+        int retour;
+        do {
+            System.out.println("""
+                    ====== Choix de couleur ======
+                    Rouge = 1
+                    Bleu = 2
+                    Vert = 3
+                    Jaune = 4
+                    
+                    Saisir le chiffre correspondant :
+                    """);
+            try{
+                retour= input.nextInt();
+            }catch (InputMismatchException e){
+                retour=0;
+            }
+        }while (retour<1||retour>4);
+
+        return retour;
     }
 
 }

@@ -22,11 +22,6 @@ public class Jeu {
                 TourJoueur joueurQuijoue=new TourJoueur(table ,joueur,paquet.getPaquet());
                 table= joueurQuijoue.tourJoueur();
                 setFinPartie(joueur);
-                // todo regarder le type de la carte sur la table pour prendre une decision sur la suite
-                if (table instanceof AbstractCarteAttaque){
-
-                }
-
             }
         }
     }

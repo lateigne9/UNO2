@@ -13,7 +13,7 @@ public class SuperJoker extends AbstractCarteAttaque {
      * @param couleur Couleur dont la carte deviendra
      */
     public void changeCouleur(Couleur couleur) {
-        setCouleur(couleur);
+        super.setCouleur(couleur);
     }
 
     @Override

@@ -15,6 +15,10 @@ public abstract class AbstractCarteAttaque extends AbstractCarte {
         return attaque;
     }
 
+    public void setPouvoir(boolean pouvoir) {
+        this.pouvoir = pouvoir;
+    }
+
     public boolean isPouvoir() {
         return pouvoir;
     }
