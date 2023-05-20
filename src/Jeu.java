@@ -1,5 +1,4 @@
 import cartes.AbstractCarte;
-import cartes.AbstractCarteAttaque;
 
 import java.util.ArrayList;
 import java.util.Collection;
